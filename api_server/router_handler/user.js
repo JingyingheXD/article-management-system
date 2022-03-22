@@ -25,7 +25,24 @@ exports.register = (req, res) => {
     }
 
     userinfo.password = bcrypt.hashSync(userinfo.password, 10);
-    console.log(userinfo);
+
+    const sqlInsert = `INSERT into ev_users set ?`;
+    db.query(
+      sqlInsert,
+      {
+        username: userinfo.username,
+        password: userinfo.password,
+      },
+      (err, results) => {
+        if (err) return res.send({ status: 1, message: err.message });
+        if (results.affectedRows !== 1)
+          return res.send({
+            status: 1,
+            message: "Register failed, please try it later.",
+          });
+        res.send({ status: 1, message: "Register successfully." });
+      }
+    );
   });
 };
 
