@@ -1,4 +1,6 @@
 const db = require("../db/index");
+const bcrypt = require("bcryptjs");
+const { use } = require("../router/user");
 
 exports.register = (req, res) => {
   const userinfo = req.body;
@@ -21,7 +23,9 @@ exports.register = (req, res) => {
         message: "This usernmae exists, please change another one.",
       });
     }
-    // TODO: username can be used
+
+    userinfo.password = bcrypt.hashSync(userinfo.password, 10);
+    console.log(userinfo);
   });
 };
 
