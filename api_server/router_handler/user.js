@@ -23,8 +23,6 @@ exports.register = (req, res) => {
     }
     // TODO: username can be used
   });
-
-  res.send("register OK");
 };
 
 exports.login = (req, res) => {
