@@ -59,7 +59,7 @@ exports.login = (req, res) => {
     res.send({
       status: 0,
       message: "Login successfully.",
-      token: "bearer " + tokenStr,
+      token: "Bearer " + tokenStr,
     });
   });
 };

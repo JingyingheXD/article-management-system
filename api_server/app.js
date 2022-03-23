@@ -3,6 +3,8 @@ const app = express();
 const cors = require("cors");
 const userRouter = require("./router/user");
 const joi = require("joi");
+const expressJWT = require("express-jwt");
+const config = require("./config");
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
@@ -18,8 +20,6 @@ app.use((req, res, next) => {
 });
 
 // have to config decoded token middleware before router
-const expressJWT = require("express-jwt");
-const config = require("./config");
 app.use(
   expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] })
 );
