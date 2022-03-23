@@ -14,14 +14,11 @@ exports.register = (req, res) => {
   const sqlStr = `SELECT * FROM ev_users WHERE username=?`;
   db.query(sqlStr, userinfo.username, (err, results) => {
     if (err) {
-      return res.send({ status: 1, message: err.message });
+      return res.cc(err);
     }
 
     if (results.length > 0) {
-      return res.send({
-        status: 1,
-        message: "This usernmae exists, please change another one.",
-      });
+      return res.cc("This usernmae exists, please change another one.");
     }
 
     userinfo.password = bcrypt.hashSync(userinfo.password, 10);
@@ -34,12 +31,9 @@ exports.register = (req, res) => {
         password: userinfo.password,
       },
       (err, results) => {
-        if (err) return res.send({ status: 1, message: err.message });
+        if (err) return res.cc(err);
         if (results.affectedRows !== 1)
-          return res.send({
-            status: 1,
-            message: "Register failed, please try it later.",
-          });
+          return res.cc("Register failed, please try it later.");
         res.send({ status: 1, message: "Register successfully." });
       }
     );
