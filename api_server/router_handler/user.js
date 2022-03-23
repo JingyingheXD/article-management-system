@@ -4,12 +4,12 @@ const { use } = require("../router/user");
 
 exports.register = (req, res) => {
   const userinfo = req.body;
-  if (!userinfo.username || !userinfo.password) {
-    return res.send({
-      status: 1,
-      message: "Username or Password should not be null",
-    });
-  }
+  // if (!userinfo.username || !userinfo.password) {
+  //   return res.send({
+  //     status: 1,
+  //     message: "Username or Password should not be null",
+  //   });
+  // }
 
   const sqlStr = `SELECT * FROM ev_users WHERE username=?`;
   db.query(sqlStr, userinfo.username, (err, results) => {
