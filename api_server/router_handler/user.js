@@ -42,5 +42,14 @@ exports.login = (req, res) => {
     if (err) return res.cc(err);
     if (results.length !== 1) return res.cc("Login failed.");
     // TODO: check if password is correct.
+
+    const compareResult = bcrypt.compareSync(
+      userinfo.password,
+      results[0].password
+    );
+    if (!compareResult) return res.cc("Wrong password.");
+    return res.send("Login OK.");
+
+    // TODO: generate Token
   });
 };
