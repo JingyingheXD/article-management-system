@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-  res.cc = function (err, status = 1) {
+  res.cc = (err, status = 1) => {
     res.send({
       status,
       message: err instanceof Error ? err.message : err,
