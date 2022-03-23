@@ -36,13 +36,11 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
   const userinfo = req.body;
-  const sql = "SELECT * FROM env_users WHERE username=?";
+  const sql = `SELECT * FROM ev_users WHERE username=?`;
 
-  db.query(sql, userinfo.usernmae, (err, results) => {
-    if (err) return res.cc;
+  db.query(sql, userinfo.username, (err, results) => {
+    if (err) return res.cc(err);
     if (results.length !== 1) return res.cc("Login failed.");
     // TODO: check if password is correct.
   });
-
-  res.send("login OK");
 };
