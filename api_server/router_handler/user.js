@@ -34,7 +34,7 @@ exports.register = (req, res) => {
         if (err) return res.cc(err);
         if (results.affectedRows !== 1)
           return res.cc("Register failed, please try it later.");
-        res.send({ status: 1, message: "Register successfully." });
+        return res.cc('Register successfully', 0)
       }
     );
   });
