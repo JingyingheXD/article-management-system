@@ -1,6 +1,8 @@
 const db = require("../db/index");
 const bcrypt = require("bcryptjs");
 const { use } = require("../router/user");
+const jwt = require("jsonwebtoken");
+const config = require("../config");
 
 exports.register = (req, res) => {
   const userinfo = req.body;
@@ -41,15 +43,23 @@ exports.login = (req, res) => {
   db.query(sql, userinfo.username, (err, results) => {
     if (err) return res.cc(err);
     if (results.length !== 1) return res.cc("Login failed.");
-    // TODO: check if password is correct.
 
     const compareResult = bcrypt.compareSync(
       userinfo.password,
       results[0].password
     );
     if (!compareResult) return res.cc("Wrong password.");
-    return res.send("Login OK.");
 
-    // TODO: generate Token
+    // remove private information when generating Token
+    const user = { ...results[0], password: "", user_pic: "" };
+    const tokenStr = jwt.sign(user, config.jwtSecretKey, {
+      expiresIn: config.expireIn,
+    });
+
+    res.send({
+      status: 0,
+      message: "Login successfully.",
+      token: "bearer " + tokenStr,
+    });
   });
 };
