@@ -17,10 +17,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// have to config decoded token middleware before router
+const expressJWT = require("express-jwt");
+const config = require("./config");
+app.use(
+  expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] })
+);
+
 app.use("/api", userRouter);
 
 app.use((err, req, res, next) => {
   if (err instanceof joi.ValidationError) return res.cc(err);
+  if (err.name === "UnauthorizedError") return res.cc("Authentication failed.");
   return res.cc(err);
 });
 
