@@ -4,7 +4,7 @@
   "description": "A back-end project (using Express.js framework) allows users to register accounts to manage their own articles and classification.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
