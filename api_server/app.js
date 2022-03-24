@@ -28,7 +28,7 @@ app.use("/api", userRouter);
 
 app.use((err, req, res, next) => {
   if (err instanceof joi.ValidationError) return res.cc(err);
-  if (err.name === "UnauthorizedError") return res.cc("Authentication failed.");
+  if (err.name === "UnauthorizedError") return res.cc("Authorize failed.");
   return res.cc(err);
 });
 
