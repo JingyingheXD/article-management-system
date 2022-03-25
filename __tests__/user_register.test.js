@@ -11,5 +11,16 @@ describe("POST /api/register", () => {
       });
       expect(response.statusCode).toBe(200);
     });
+
+    test("should specify json as the content-type in the header", async () => {
+      expect.assertions(1);
+      const response = await request(app).post("/api/register").send({
+        username: "usernmae",
+        password: "password",
+      });
+      expect(response.headers["content-type"]).toEqual(
+        expect.stringContaining("json")
+      );
+    });
   });
 });
