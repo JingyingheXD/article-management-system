@@ -59,7 +59,6 @@ describe("POST /api/register", () => {
       expect(response2.body.status).toBe(1);
       expect(response3.body.status).toBe(1);
       expect(response4.body.status).toBe(1);
-      // console.log(`resonse 4`, response4);
       expect(response5.body.status).toBe(0);
     });
   });
