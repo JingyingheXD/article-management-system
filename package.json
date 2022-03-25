@@ -25,7 +25,8 @@
     "express-jwt": "^5.3.3",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "supertest": "^6.2.2"
   },
   "devDependencies": {
     "jest": "^27.5.1"
