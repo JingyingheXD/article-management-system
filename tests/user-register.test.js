@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../api_server/app");
+const app = require("../api-server/app");
 const jest = require("@jest/globals");
 
 const createUser = jest.fn();
