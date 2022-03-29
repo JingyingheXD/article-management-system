@@ -1,8 +1,5 @@
 const request = require("supertest");
 const app = require("../api-server/app");
-const jest = require("@jest/globals");
-
-const createUser = jest.fn();
 
 describe("POST /api/register", () => {
   describe("when passed a username and password", () => {

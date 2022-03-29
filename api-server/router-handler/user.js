@@ -1,4 +1,6 @@
 const db = require("../db/index");
+const db_current = process.env.NODE_ENV === "test" ? db.db_test : db.db;
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("../config");
@@ -7,7 +9,7 @@ exports.register = (req, res) => {
   const userinfo = req.body;
 
   const sqlStr = `SELECT * FROM ev_users WHERE username=?`;
-  db.query(sqlStr, userinfo.username, (err, results) => {
+  db_current.query(sqlStr, userinfo.username, (err, results) => {
     if (err) {
       return res.cc(err);
     }
@@ -19,7 +21,7 @@ exports.register = (req, res) => {
     userinfo.password = bcrypt.hashSync(userinfo.password, 10);
 
     const sqlInsert = `INSERT into ev_users set ?`;
-    db.query(
+    db_current.query(
       sqlInsert,
       {
         username: userinfo.username,
@@ -39,7 +41,7 @@ exports.login = (req, res) => {
   const userinfo = req.body;
   const sql = `SELECT * FROM ev_users WHERE username=?`;
 
-  db.query(sql, userinfo.username, (err, results) => {
+  db_current.query(sql, userinfo.username, (err, results) => {
     if (err) return res.cc(err);
     if (results.length !== 1) return res.cc("Login failed.");
 
