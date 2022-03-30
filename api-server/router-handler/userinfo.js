@@ -1,5 +1,6 @@
 const db = require("../db/index");
 const db_current = process.env.NODE_ENV === "test" ? db.db_test : db.db;
+const bcrypt = require("bcryptjs");
 
 exports.getUserInfo = (req, res) => {
   const sql = `SELECT id, username, nickname, email, user_pic FROM ev_users WHERE id=?`;
@@ -31,6 +32,12 @@ exports.updatePassword = (req, res) => {
   db_current.query(sql, req.user.id, (err, results) => {
     if (err) return res.cc(err);
     if (results.length !== 1) return res.cc("User not exist.");
+
+    const compareResult = bcrypt.compareSync(
+      req.body.oldPwd,
+      results[0].password
+    );
+    if (!compareResult) return res.cc("The old password is wrong.");
 
     res.cc("ok");
   });
