@@ -8,11 +8,7 @@ const {
   update_avatar_schema,
 } = require("../schema/user");
 
-router.get(
-  "/userinfo",
-  expressJoi(update_userinfo_schema),
-  userinfoHandler.getUserInfo
-);
+router.get("/userinfo", userinfoHandler.getUserInfo);
 
 router.post(
   "/userinfo",
