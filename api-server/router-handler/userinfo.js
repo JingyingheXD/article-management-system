@@ -27,5 +27,11 @@ exports.updateUserInfo = (req, res) => {
 };
 
 exports.updatePassword = (req, res) => {
-  res.send("OK");
+  const sql = `SELECT * FROM ev_users WHERE id=?`;
+  db_current.query(sql, req.user.id, (err, results) => {
+    if (err) return res.cc(err);
+    if (results.length !== 1) return res.cc("User not exist.");
+
+    res.cc("ok");
+  });
 };
