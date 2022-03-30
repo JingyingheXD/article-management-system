@@ -16,4 +16,3 @@ exports.getArtCates = (req, res) => {
 exports.addArticleCates = (req, res) => {
   res.send("OK");
 };
-  
