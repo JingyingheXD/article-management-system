@@ -25,4 +25,6 @@ router.post(
   userinfoHandler.updatePassword
 );
 
+router.post("/update/avatar", userinfoHandler.updateAvatar);
+
 module.exports = router;
