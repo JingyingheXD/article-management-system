@@ -17,7 +17,7 @@ exports.getUserInfo = (req, res) => {
 };
 
 exports.updateUserInfo = (req, res) => {
-  const sql = `UPDATE ev_users set ? WHERE id=?`;
+  const sql = `UPDATE ev_users SET ? WHERE id=?`;
   db_current.query(sql, [req.body, req.body.id], (err, results) => {
     if (err) return res.cc(err);
     if (results.affectedRows !== 1)
@@ -39,7 +39,7 @@ exports.updatePassword = (req, res) => {
     );
     if (!compareResult) return res.cc("The old password is wrong.");
 
-    const sqlUpdatePwd = `UPDATE ev_users set password=? WHERE id=?`;
+    const sqlUpdatePwd = `UPDATE ev_users SET password=? WHERE id=?`;
     const newPwd = bcrypt.hashSync(req.body.newPwd, 10);
     db_current.query(sqlUpdatePwd, [newPwd, req.user.id], (err, results) => {
       if (err) return res.cc(err);
@@ -50,5 +50,10 @@ exports.updatePassword = (req, res) => {
 };
 
 exports.updateAvatar = (req, res) => {
-  res.send("ok");
+  const sql = `UPDATE ev_users SET user_pic=? WHERE id=?`;
+  db_current.query(sql, [req.body.avatar, req.user.id], (err, results) => {
+    if (err) return res.cc(err);
+    if (results.affectedRows !== 1) return res.cc("Update avatar failed.");
+    res.cc("Update avatar successfully.", 0);
+  });
 };
