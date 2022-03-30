@@ -26,7 +26,9 @@ exports.update_userinfo_schema = {
 };
 
 exports.update_password_schema = {
-  oldPwd: password,
-  // newPwd shouldn't equal with oldPwd, and it should satisfies password schema
-  newPwd: joi.not(joi.ref("oldPwd")).concat(password),
+  body: {
+    oldPwd: password,
+    // newPwd shouldn't equal with oldPwd, and it should satisfies password schema
+    newPwd: joi.not(joi.ref("oldPwd")).concat(password),
+  },
 };
