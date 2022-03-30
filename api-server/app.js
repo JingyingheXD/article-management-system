@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const userRouter = require("./router/user");
 const joi = require("joi");
 const expressJWT = require("express-jwt");
 const config = require("./config");
@@ -25,7 +24,11 @@ app.use(
   expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] })
 );
 
+const userRouter = require("./router/user");
 app.use("/api", userRouter);
+
+const userinfoRouter = require("./router/userinfo");
+app.use("/my", userinfoRouter);
 
 app.use((err, req, res, next) => {
   if (err instanceof joi.ValidationError) return res.cc(err);
