@@ -25,3 +25,7 @@ exports.updateUserInfo = (req, res) => {
     res.cc("Update user information successfully.", 0);
   });
 };
+
+exports.updatePassword = (req, res) => {
+  res.send("OK");
+};
