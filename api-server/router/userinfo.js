@@ -1,8 +1,8 @@
 const express = require("express");
-const router = express.Router;
+const router = express.Router();
+const userinfoHandler = require("../router-handler/userinfo");
 
-router.length("/userinfo", (req, res) => {
-  res.send("OK");
-});
+
+router.get("/userinfo", userinfoHandler.getUserInfo);
 
 module.exports = router;
