@@ -14,3 +14,7 @@ exports.getUserInfo = (req, res) => {
     });
   });
 };
+
+exports.updateUserInfo = (req, res) => {
+  res.send("OK");
+};
