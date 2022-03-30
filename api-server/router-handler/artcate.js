@@ -31,6 +31,12 @@ exports.addArticleCates = (req, res) => {
     if (results.length === 1 && results[0].alias === req.body.alias)
       return res.cc("Alias exists, please change a new alias.");
 
-    // TODO: can add new article cate
+    const sqlInsert = `INSERT INTO ev_article_cate SET?`;
+    db_current.query(sqlInsert, req.body, (err, results) => {
+      if (err) return res.cc(err);
+      if (results.affectedRows !== 1)
+        return res.cc("Add article category failed.");
+      return res.cc("Add article category successfully.", 0);
+    });
   });
 };
