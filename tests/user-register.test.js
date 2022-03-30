@@ -1,5 +1,36 @@
-const request = require("supertest");
-const app = require("../api-server/app");
+// const request = require("supertest");
+// const app = require("../api-server/app");
+const db = require("../api-server/db/index");
+const db_current = db.db_test;
+const userHandler = require("../api-server/router-handler/user");
+
+// describe("register()", () => {
+//   describe("when the username exists", () => {
+//     beforeEach(() => {
+//       db_current.query("DELETE FROM env_users");
+//     });
+//     test("should call res.cc with argument - 'This usernmae exists, please change another one'.", async () => {
+//       const sql =
+//         "INSERT INTO env_users (username, password) VALUES ('Jenny', '123456')";
+//       db_current.query(sql, (err, results) => {
+//         console.log(err);
+//       });
+
+//       const req = {
+//         body: {
+//           username: "Jenny",
+//           password: "123456",
+//         },
+//       };
+//       const response = {
+//         status: 1,
+//         message: "This usernmae exists, please change another one.",
+//       };
+
+//       expect(userHandler.register(req, res)).toEqual(response);
+//     });
+//   });
+// });
 
 describe("POST /api/register", () => {
   describe("when passed a username and password", () => {
