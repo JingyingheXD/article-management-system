@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const artCateHandler = require("../router-handler/artcate");
 
-router.get("/cates", (req, res) => {
-  res.send("OK");
-});
+router.get("/cates", artCateHandler.getArtCates);
 
 module.exports = router;
  
