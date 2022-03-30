@@ -24,3 +24,9 @@ exports.update_userinfo_schema = {
     email,
   },
 };
+
+exports.update_password_schema = {
+  oldPwd: password,
+  // newPwd shouldn't equal with oldPwd, and it should satisfies password schema
+  newPwd: joi.not(joi.ref("oldPwd")).concat(password),
+};
