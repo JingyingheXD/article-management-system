@@ -39,6 +39,12 @@ exports.updatePassword = (req, res) => {
     );
     if (!compareResult) return res.cc("The old password is wrong.");
 
-    res.cc("ok");
+    const sqlUpdatePwd = `UPDATE ev_users set password=? WHERE id=?`;
+    const newPwd = bcrypt.hashSync(req.body.newPwd, 10);
+    db_current.query(sqlUpdatePwd, [newPwd, req.user.id], (err, results) => {
+      if (err) return res.cc(err);
+      if (results.affectedRows !== 1) return res.cc("Update password failed.");
+      res.cc("Update password successfully.", 0);
+    });
   });
 };
