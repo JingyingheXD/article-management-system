@@ -16,5 +16,12 @@ exports.getUserInfo = (req, res) => {
 };
 
 exports.updateUserInfo = (req, res) => {
-  res.send("OK");
+  const sql = `UPDATE ev_users set ? WHERE id=?`;
+  db_current.query(sql, [req.body, req.body.id], (err, results) => {
+    if (err) return res.cc(err);
+    if (results.affectedRows !== 1)
+      return res.cc("Update user information failed.");
+
+    res.cc("Update user information successfully.", 0);
+  });
 };
