@@ -23,3 +23,11 @@ exports.get_cate_schema = {
     id,
   },
 };
+
+exports.update_cate_schema = {
+  body: {
+    Id: id,
+    name,
+    alias,
+  },
+};

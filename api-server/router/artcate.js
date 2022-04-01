@@ -6,6 +6,7 @@ const {
   add_cate_schema,
   delete_cate_schema,
   get_cate_schema,
+  update_cate_schema,
 } = require("../schema/artcate");
 
 router.get("/cates", artCateHandler.getArtCates);
@@ -26,6 +27,12 @@ router.get(
   "/cate/:id",
   expressJoi(get_cate_schema),
   artCateHandler.getArtCateById
+);
+
+router.post(
+  "/updatecate",
+  expressJoi(update_cate_schema),
+  artCateHandler.updateCateById
 );
 
 module.exports = router;
