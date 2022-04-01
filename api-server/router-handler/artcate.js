@@ -40,3 +40,7 @@ exports.addArticleCates = (req, res) => {
     });
   });
 };
+
+exports.deleteCateById = (req, res) => {
+  res.send("ok");
+};

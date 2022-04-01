@@ -12,4 +12,6 @@ router.post(
   artCateHandler.addArticleCates
 );
 
+router.get('/deletecate/:id', artCateHandler.deleteCateById)
+
 module.exports = router;
