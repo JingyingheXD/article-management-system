@@ -42,5 +42,11 @@ exports.addArticleCates = (req, res) => {
 };
 
 exports.deleteCateById = (req, res) => {
-  res.send("ok");
+  const sql = `UPDATE ev_article_cate SET is_delete=1 WHERE id=?`;
+  db_current.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err);
+    if (results.affectedRows !== 1)
+      return res.cc("Delete article category failed.");
+    res.cc("Delete article category successfully.", 0);
+  });
 };
