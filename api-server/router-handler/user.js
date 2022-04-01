@@ -20,7 +20,7 @@ exports.register = (req, res) => {
 
     userinfo.password = bcrypt.hashSync(userinfo.password, 10);
 
-    const sqlInsert = `INSERT into ev_users set ?`;
+    const sqlInsert = `INSERT INTO ev_users SET ?`;
     db_current.query(
       sqlInsert,
       {
