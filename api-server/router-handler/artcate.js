@@ -50,3 +50,7 @@ exports.deleteCateById = (req, res) => {
     res.cc("Delete article category successfully.", 0);
   });
 };
+
+exports.getArtCateById = (req, res) => {
+  res.send("ok");
+};

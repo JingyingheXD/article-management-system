@@ -18,4 +18,6 @@ router.get(
   artCateHandler.deleteCateById
 );
 
+router.get("/cate/:id", artCateHandler.getArtCateById);
+
 module.exports = router;
