@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 const expressJoi = require("@escook/express-joi");
 const artCateHandler = require("../router-handler/artcate");
-const { add_cate_schema, delete_cate_schema } = require("../schema/artcate");
+const {
+  add_cate_schema,
+  delete_cate_schema,
+  get_cate_schema,
+} = require("../schema/artcate");
 
 router.get("/cates", artCateHandler.getArtCates);
 
@@ -18,6 +22,10 @@ router.get(
   artCateHandler.deleteCateById
 );
 
-router.get("/cate/:id", artCateHandler.getArtCateById);
+router.get(
+  "/cate/:id",
+  expressJoi(get_cate_schema),
+  artCateHandler.getArtCateById
+);
 
 module.exports = router;
