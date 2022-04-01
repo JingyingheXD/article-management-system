@@ -52,5 +52,15 @@ exports.deleteCateById = (req, res) => {
 };
 
 exports.getArtCateById = (req, res) => {
-  res.send("ok");
+  const sql = `SELECT * FROM ev_article_cate WHERE id=?`;
+  db_current.query(sql, req.params.id, (err, results) => {
+    if (err) return res.cc(err);
+    if (results.length !== 1)
+      return res.cc("Get article category data failed.");
+    res.send({
+      status: 0,
+      message: "Get article category data successfully.",
+      data: results[0],
+    });
+  });
 };
