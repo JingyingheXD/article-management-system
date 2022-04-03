@@ -15,7 +15,7 @@ exports.register = (req, res) => {
     }
 
     if (results.length > 0) {
-      return res.cc("This usernmae exists, please change another one.");
+      return res.cc("This username exists, please change another one.");
     }
 
     userinfo.password = bcrypt.hashSync(userinfo.password, 10);
