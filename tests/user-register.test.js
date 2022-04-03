@@ -28,25 +28,29 @@ describe("POST /api/register", () => {
           expect(rowsNumber).toBe(ExpectedRowsNumber);
           done();
         });
+      })
+      .catch((e) => {
+        throw done(e);
       });
   };
 
   describe("input with invalid username and password", () => {
-    test("should respond with status 1 when not pass a username", (done) => {
+    test("should respond with status 1 and no database changes when not pass a username", (done) => {
       const userCase1 = {
         password: "password",
       };
       respond(done, userCase1, 1, 0);
     });
 
-    test("should respond with status 1 when username including symbols", (done) => {
+    test("should respond with status 1 and no database changes when username including symbols", (done) => {
       const userCase2 = {
         username: "username!@#",
         password: "password",
       };
       respond(done, userCase2, 1, 0);
     });
-    test("should respond with status 1 when password length less than 6", (done) => {
+
+    test("should respond with status 1 and no database changes when password length less than 6", (done) => {
       const userCase3 = {
         username: "username",
         password: "pwd",
@@ -56,7 +60,7 @@ describe("POST /api/register", () => {
   });
 
   describe("input with valid username and password", () => {
-    test("should respond with status 1 and message when the username already exists in the database", (done) => {
+    test("should respond with status 1 and no database changes when the username already exists in the database", (done) => {
       db_current.query(
         `INSERT INTO ev_users (username, password) VALUES ('Jane', 'asdfgh')`,
         (err, results) => {
@@ -70,7 +74,7 @@ describe("POST /api/register", () => {
       );
     });
 
-    test("should respond with status 0 and message when the user register successfully", (done) => {
+    test("should respond with status 0 and insert a row into database when the user register successfully", (done) => {
       const userCase5 = {
         username: "Jenny",
         password: "098765",
