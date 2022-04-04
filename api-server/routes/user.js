@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const userHandler = require("../router-handler/user");
+const userHandler = require("../controllers/user");
 
 const expressJoi = require("@escook/express-joi");
 const { reg_login_schema } = require("../schema/user");

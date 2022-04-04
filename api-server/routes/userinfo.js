@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const userinfoHandler = require("../router-handler/userinfo");
+const userinfoHandler = require("../controllers/userinfo");
 const expressJoi = require("@escook/express-joi");
 const {
   update_userinfo_schema,
