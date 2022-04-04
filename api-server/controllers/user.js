@@ -5,31 +5,27 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("../config");
 
+const userModel = require("../models/user");
+
 exports.register = (req, res) => {
   const userinfo = req.body;
 
-  const sqlStr = `SELECT * FROM ev_users WHERE username=?`;
-  db_current.query(sqlStr, userinfo.username, (err, results) => {
-    if (err) {
-      return res.cc(err);
+  userModel.read(userinfo.username, (readErr, readResults) => {
+    if (readErr) {
+      return res.cc(readErr);
     }
-
-    if (results.length > 0) {
+    if (readResults.length > 0) {
       return res.cc("This username exists, please change another one.");
     }
 
     userinfo.password = bcrypt.hashSync(userinfo.password, 10);
 
-    const sqlInsert = `INSERT INTO ev_users SET ?`;
-    db_current.query(
-      sqlInsert,
-      {
-        username: userinfo.username,
-        password: userinfo.password,
-      },
-      (err, results) => {
-        if (err) return res.cc(err);
-        if (results.affectedRows !== 1)
+    userModel.insert(
+      userinfo.username,
+      userinfo.password,
+      (insertErr, insertResults) => {
+        if (insertErr) return res.cc(insertErr);
+        if (insertResults.affectedRows !== 1)
           return res.cc("Register failed, please try it later.");
         return res.cc("Register successfully", 0);
       }

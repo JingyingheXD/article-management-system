@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const expressJoi = require("@escook/express-joi");
-const artCateHandler = require("../router-handler/artcate");
+const artCateHandler = require("../controllers/artcate");
 const {
   add_cate_schema,
   delete_cate_schema,

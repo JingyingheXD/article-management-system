@@ -24,16 +24,16 @@ app.use(
   expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api/] })
 );
 
-const userRouter = require("./router/user");
+const userRouter = require("./routes/user");
 app.use("/api", userRouter);
 
-const userinfoRouter = require("./router/userinfo");
+const userinfoRouter = require("./routes/userinfo");
 app.use("/my", userinfoRouter);
 
-const artCateRouter = require("./router/artcate");
+const artCateRouter = require("./routes/artcate");
 app.use("/my/article", artCateRouter);
 
-const articleRouter = require("./router/article");
+const articleRouter = require("./routes/article");
 app.use("/my/article", articleRouter);
 
 app.use((err, req, res, next) => {
