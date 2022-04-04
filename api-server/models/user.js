@@ -10,11 +10,7 @@ exports.read = (username, process) => {
 
 exports.insert = (username, password, process) => {
   const sql = `INSERT INTO ev_users SET ?`;
-  db_current.query(
-    sql,
-    { username: username, password: password },
-    (err, results) => {
-      process(err, results);
-    }
-  );
+  db_current.query(sql, { username, password }, (err, results) => {
+    process(err, results);
+  });
 };
